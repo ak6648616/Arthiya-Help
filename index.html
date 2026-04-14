@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dhakla Mandi | Master Portal</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Noto+Sans+Devanagari:wght@600;800&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-green: #004d40;
+            --accent-gold: #ffc107;
+            --text-dark: #1a1a1a;
+            --bg-light: #f0f4f7;
+            --white: #ffffff;
+            --whatsapp: #25D366;
+            --sms: #03a9f4;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Roboto', 'Noto Sans Devanagari', sans-serif; }
+        
+        body { 
+            background: linear-gradient(135deg, #00241f 0%, #004d40 100%); 
+            min-height: 100vh;
+            color: var(--text-dark);
+        }
+
+        /* --- LANDING PAGE --- */
+        #landing-page {
+            height: 100vh; display: flex; flex-direction: column;
+            justify-content: center; align-items: center; text-align: center; color: white;
+            padding: 20px;
+        }
+
+        .hero-title { font-size: 3.5rem; font-weight: 800; margin-bottom: 5px; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
+        .hero-title span { color: var(--accent-gold); }
+        .hero-subtitle { font-size: 1.2rem; opacity: 0.9; margin-bottom: 40px; }
+
+        .choice-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; width: 100%; max-width: 800px; }
+        
+        .mode-card {
+            background: var(--white); color: var(--text-dark); padding: 40px 20px;
+            border-radius: 15px; cursor: pointer; transition: 0.3s;
+            border: 4px solid transparent; text-align: center;
+        }
+        .mode-card:hover { border-color: var(--accent-gold); transform: scale(1.03); }
+        .mode-card i { font-size: 3rem; display: block; margin-bottom: 15px; font-style: normal; }
+        .mode-card h3 { font-size: 1.5rem; color: var(--primary-green); }
+
+        /* --- WORKSPACE --- */
+        #workspace-page { display: none; padding: 30px 15px; }
+        
+        .container {
+            max-width: 1100px; margin: 0 auto; background: var(--bg-light);
+            border-radius: 20px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+
+        .header-bar { 
+            background: var(--primary-green); color: white; padding: 20px 30px;
+            display: flex; justify-content: space-between; align-items: center;
+            border-bottom: 5px solid var(--accent-gold);
+        }
+
+        .content-body { padding: 30px; }
+        .btn-back { background: var(--accent-gold); color: #000; padding: 10px 20px; border-radius: 8px; font-weight: 700; border: none; cursor: pointer; }
+
+        /* --- FORM --- */
+        .input-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-bottom: 25px; }
+        label { font-weight: 700; display: block; margin-bottom: 8px; color: var(--primary-green); font-size: 0.9rem; }
+        input, select, textarea {
+            width: 100%; padding: 15px; border: 2px solid #ced4da; border-radius: 10px;
+            font-size: 1.1rem; color: #000; background: var(--white);
+        }
+        textarea { height: 160px; font-weight: 600; color: #2c3e50; border-left: 6px solid var(--primary-green); line-height: 1.6; }
+
+        .main-action-btn {
+            width: 100%; background: var(--primary-green); color: white; padding: 20px;
+            border: none; border-radius: 10px; font-size: 1.2rem; font-weight: 700;
+            cursor: pointer; transition: 0.2s;
+        }
+
+        /* --- DATA TABLE --- */
+        .table-wrap { margin-top: 40px; background: white; border-radius: 15px; overflow-x: auto; border: 1px solid #ddd; }
+        table { width: 100%; border-collapse: collapse; min-width: 700px; }
+        th { background: #e9ecef; padding: 15px; text-align: left; color: #495057; font-weight: 700; }
+        td { padding: 15px; border-bottom: 1px solid #eee; vertical-align: middle; }
+
+        .row-name { font-weight: 800; font-size: 1.1rem; color: var(--primary-green); }
+        .row-sub { color: #666; font-size: 0.9rem; }
+
+        .btn-group { display: flex; gap: 5px; flex-wrap: wrap; }
+        .btn-sm { 
+            padding: 8px 12px; border-radius: 6px; border: none; 
+            color: white; font-weight: 700; cursor: pointer; text-decoration: none; font-size: 0.75rem;
+            display: inline-block;
+        }
+
+        .bg-wa { background: var(--whatsapp); }
+        .bg-sms { background: var(--sms); }
+        .bg-copy { background: #455a64; }
+        .bg-del { background: #d32f2f; }
+
+        @media (max-width: 600px) {
+            .hero-title { font-size: 2.2rem; }
+            .header-bar { flex-direction: column; gap: 10px; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <section id="landing-page">
+        <h1 class="hero-title">DHAKLA <span>MANDI</span></h1>
+        <p class="hero-subtitle">Premium Management Portal</p>
+        
+        <div class="choice-grid">
+            <div class="mode-card" onclick="openPortal('bio')">
+                <i>🖑</i>
+                <h3>Biometric Alert</h3>
+                <p>Alert farmers for thumb impression</p>
+            </div>
+            <div class="mode-card" onclick="openPortal('thanks')">
+                <i>🙏</i>
+                <h3>Gratitude Letter</h3>
+                <p>Send thanks for crop harvest</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="workspace-page">
+        <div class="container">
+            <div class="header-bar">
+                <h2 id="portal-title">DASHBOARD</h2>
+                <button class="btn-back" onclick="location.reload()">← BACK HOME</button>
+            </div>
+
+            <div class="content-body">
+                <div class="input-grid">
+                    <div>
+                        <label>SELECT FIRM (फर्म चुनें)</label>
+                        <select id="firmSelect" onchange="updateMessage()">
+                            <option value="">-- Choose Firm --</option>
+                            <option value="AMIT TRADING COMPANY|8398991900|Amit">AMIT TRADING COMPANY</option>
+                            <option value="DAGAR TRADING COMPANY DHAKLA|9466281664|Sonu Dagar">DAGAR TRADING COMPANY DHAKLA</option>
+                            <option value="DESHWAL TRADING COMPANY|9588192753|Monu Deshwal">DESHWAL TRADING COMPANY</option>
+                            <option value="DEV TRADING COMPANY|9050271866|Tejpal">DEV TRADING COMPANY</option>
+                            <option value="JAMIDAR TRADING COMPANY|9812345678|Vijay">JAMIDAR TRADING COMPANY</option>
+                            <option value="M D TRADING COMPANY|7988695338|Anil">M D TRADING COMPANY</option>
+                            <option value="MAAN TRADING COMPANY|9671829251|Satnarayan">MAAN TRADING COMPANY</option>
+                            <option value="MALHAN TRADING COMPANY|9813030375|Shribhagwan">MALHAN TRADING COMPANY</option>
+                            <option value="MANISH TRADING CO|9050270065|Chand">MANISH TRADING CO</option>
+                            <option value="MOHAN RAM TRADING COMPANY|9050811410|Narender">MOHAN RAM TRADING COMPANY</option>
+                            <option value="MOR TRADING COMPANY|8053904329|Ramchander">MOR TRADING COMPANY</option>
+                            <option value="MUKESH TRADING COMPANY|9671311286|Mukesh">MUKESH TRADING COMPANY</option>
+                            <option value="NAMBERDAR TRADING COMPANY|9050425309|Sukhbir">NAMBERDAR TRADING COMPANY</option>
+                            <option value="OM TRADING COMPANY|9896845529|Surajmal">OM TRADING COMPANY</option>
+                            <option value="PURANMAL TRADING COMPANY|9416477632|Ravinder Dhole">PURANMAL TRADING COMPANY</option>
+                            <option value="RAJESH TRADING COMPANY|9813705139|Rajesh Nishu">RAJESH TRADING COMPANY</option>
+                            <option value="SADHURAM TRADING COMPANY|9467767852|Sadhu">SADHURAM TRADING COMPANY</option>
+                            <option value="SHREE SHYAM TRADING COMPANY|9050362901|Dhillu">SHREE SHYAM TRADING COMPANY</option>
+                            <option value="SINGLA TRADING COMPANY DHAKLA|9812778779|Gopal">SINGLA TRADING COMPANY DHAKLA</option>
+                            <option value="THE JAKHAR TRADING COMPANY|9813922717|Surender">THE JAKHAR TRADING COMPANY</option>
+                            <option value="YASH TRADING COMPANY|9050625261|Rmratan">YASH TRADING COMPANY</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label>FARMER NAME (किसान का नाम)</label>
+                        <input type="text" id="kName" placeholder="Enter Name" oninput="updateMessage()">
+                    </div>
+                    <div>
+                        <label>MOBILE NUMBER (मोबाइल)</label>
+                        <input type="number" id="kMobile" placeholder="10 Digits">
+                    </div>
+                </div>
+
+                <div style="margin-bottom: 25px;">
+                    <label>MESSAGE PREVIEW (पूर्वावलोकन)</label>
+                    <textarea id="msgArea" readonly></textarea>
+                </div>
+
+                <button class="main-action-btn" onclick="saveRecord()">SAVE AND ADD TO LIST</button>
+
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>FARMER</th>
+                                <th>FIRM</th>
+                                <th>SEND ACTIONS</th>
+                                <th>REMOVE</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tableBody"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        let mode = 'bio';
+        const msgs = {
+            bio: (n, f, a, p) => `नमस्कार ${n} जी, मैं ${f} से ${a}, आपको ये सुचित करना चाहता हूं कि आप मंडी में अनाज डालने के बाद घर जाने से पहले मशीन में अपना अंगूठा लगा कर नहीं गए हैं, कृपा करके समय रहते मंडी में आकर अपना बायोमेट्रिक सत्यापन पूरा करें अन्यथा आपके अनाज का पैसा रुक जाएगा। अधिक जानकारी के लिए दिए गए नंबर ${p} पर संपर्क करें, धन्यवाद।`,
+            thanks: (n, f, a, p) => `नमस्कार ${n} जी, मैं ${f} से ${a}, आपका दिल की गहराइयों से धन्यवाद देना चाहता हूं कि आप हम पर भरोसा करके अपना अन्न हमारे पास ढाकला अनाज मंडी में डालने आए। आपके इस भरोसे के लिए दिल की गहराइयों से आपका धन्यवाद। सूचना: ${a}, ${f}, मोबाइल: ${p}`
+        };
+
+        function openPortal(m) {
+            mode = m;
+            document.getElementById('landing-page').style.display = 'none';
+            document.getElementById('workspace-page').style.display = 'block';
+            document.getElementById('portal-title').innerText = m === 'bio' ? "BIOMETRIC CENTER" : "THANKS CENTER";
+            render();
+        }
+
+        function updateMessage() {
+            const name = document.getElementById('kName').value || "(नाम)";
+            const fVal = document.getElementById('firmSelect').value;
+            if(!fVal) return;
+            const [firm, phone, arthiya] = fVal.split('|');
+            document.getElementById('msgArea').value = msgs[mode](name, firm, arthiya, phone);
+        }
+
+        function saveRecord() {
+            const n = document.getElementById('kName').value.trim();
+            const m = document.getElementById('kMobile').value.trim();
+            const f = document.getElementById('firmSelect').value;
+            
+            if(!n || m.length < 10 || !f) return alert("Fill all details!");
+
+            const [firm, phone, arthiya] = f.split('|');
+            const entry = { id: Date.now(), name: n, mob: m, firm: firm, msg: msgs[mode](n, firm, arthiya, phone) };
+            
+            let data = JSON.parse(localStorage.getItem('mandi_master_final')) || [];
+            data.unshift(entry);
+            localStorage.setItem('mandi_master_final', JSON.stringify(data));
+            
+            document.getElementById('kName').value = '';
+            document.getElementById('kMobile').value = '';
+            render();
+        }
+
+        function render() {
+            const body = document.getElementById('tableBody');
+            body.innerHTML = '';
+            let data = JSON.parse(localStorage.getItem('mandi_master_final')) || [];
+            
+            data.forEach(item => {
+                const enc = encodeURIComponent(item.msg);
+                body.innerHTML += `<tr>
+                    <td><span class="row-name">${item.name}</span><br><span class="row-sub">${item.mob}</span></td>
+                    <td><span class="row-sub">${item.firm}</span></td>
+                    <td>
+                        <div class="btn-group">
+                            <a href="https://api.whatsapp.com/send?phone=91${item.mob}&text=${enc}" target="_blank" class="btn-sm bg-wa">WhatsApp</a>
+                            <a href="sms:+91${item.mob}?body=${enc}" class="btn-sm bg-sms">Text SMS</a>
+                            <button onclick="copy('${item.msg}')" class="btn-sm bg-copy">Copy</button>
+                        </div>
+                    </td>
+                    <td><button onclick="del(${item.id})" class="btn-sm bg-del">Delete</button></td>
+                </tr>`;
+            });
+        }
+
+        function copy(txt) { navigator.clipboard.writeText(txt).then(() => alert("Message Copied!")); }
+        function del(id) { 
+            if(confirm('Delete this record?')) {
+                let data = JSON.parse(localStorage.getItem('mandi_master_final')).filter(x => x.id !== id);
+                localStorage.setItem('mandi_master_final', JSON.stringify(data));
+                render();
+            }
+        }
+    </script>
+</body>
+</html>
